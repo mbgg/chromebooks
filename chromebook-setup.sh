@@ -300,6 +300,8 @@ create_fit_image()
              lz4 arch/${CB_SETUP_ARCH}/boot/Image arch/${CB_SETUP_ARCH}/boot/Image.lz4
 
              dtbs=" \
+                    -b arch/arm64/boot/dts/mediatek/mt8173-elm.dtb \
+                    -b arch/arm64/boot/dts/mediatek/mt8183-kukui-krane-sku176.dtb \
 		    -b arch/arm64/boot/dts/rockchip/rk3399-gru-kevin.dtb\
                     -b arch/arm64/boot/dts/rockchip/rk3399-gru-scarlet-inx.dtb \
                   "
@@ -457,7 +459,7 @@ cmd_config_kernel()
         scripts/kconfig/merge_config.sh -m arch/arm/configs/multi_v7_defconfig $CWD/fragments/multi-v7/chromebooks.cfg
         make olddefconfig
     elif [ "$CB_SETUP_ARCH" == "arm64" ]; then
-        scripts/kconfig/merge_config.sh -m arch/arm64/configs/defconfig $CWD/fragments/arm64/chromebooks.cfg
+        scripts/kconfig/merge_config.sh -m arch/arm64/configs/defconfig $CWD/fragments/arm64/chromebooks.cfg $CWD/fragments/arm64/mediatek.cfg
         make olddefconfig
     else
         scripts/kconfig/merge_config.sh -m arch/x86/configs/x86_64_defconfig $CWD/fragments/x86_64/chromebooks.cfg
